@@ -1,0 +1,240 @@
+body
+    font-family: arial
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%) 
+    height: 100vh
+    color: black
+    
+header
+    text-align: center
+    padding: 10px
+    border-bottom: 2px solid black
+    font-size: 40px
+
+.container
+    height: 70vh
+    display: flex
+    align-items: center
+    justify-content: center
+
+.player-container
+    position: relative
+    padding: 20px 50px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    background: white
+    border-radius: 16px
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+
+.select_range-container
+    display: flex
+    align-content: center
+    label
+        h5
+            margin: 0px
+    input
+        display: inline-block
+        margin-left: 8px
+        transform: scale(1.5)
+
+.start-button, .input_range-confirm, .input_number-confirm, .reset_game-button
+    all: unset
+    border-radius: 16px
+    font-size: 30px
+    position: relative
+    z-index: 0
+    color: white
+
+    &:before
+        content: ''
+        background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)
+        position: absolute
+        top: -2px
+        left:-2px
+        background-size: 200%
+        z-index: -1
+        filter: blur(5px)
+        width: calc(100% + 4px)
+        height: calc(100% + 4px)
+        animation: glowing 20s linear infinite
+        opacity: 0
+        transition: opacity .3s ease-in-out
+        border-radius: 10px
+
+    &:active 
+        color: #000
+
+        &:after
+            background: transparent
+
+    &:hover:before
+        opacity: 1
+    
+    &:after 
+        z-index: -1
+        content: ''
+        position: absolute
+        width: 100%
+        height: 100%
+        background: #111
+        left: 0
+        top: 0
+        border-radius: 10px
+
+@keyframes glowing
+    0%  
+        background-position: 0 0
+    50% 
+        background-position: 400% 0
+    100% 
+        background-position: 0 0
+
+.reset_game-button
+    position: absolute
+    font-size: 12px
+    padding: 4px 4px 0 4px
+    right: 15px
+    top: -18px
+    background: white
+    color: black
+    z-index: 0
+    border-bottom-right-radius: 0
+    border-bottom-left-radius: 0
+
+    &::after
+        background: white
+
+.start-button
+    margin-top: 32px
+    display: inline-block
+    padding: 20px 50px
+
+.system_range
+    color: grey
+
+.input_range
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 20px
+    font-size: 32px
+    margin-top: 16px
+    position: relative
+
+.input_number-max, .input_number-min
+    all: unset
+    display: inline-block
+    font-size: 20px
+    min-width: 30px
+    max-width: 120px
+
+    &.error
+        color: red
+        border-bottom: 2px solid red
+
+.input_min-error
+    position: absolute
+    font-size: 12px
+    left: 32px
+    top: 40px
+    color: red
+
+.input_max-error
+    position: absolute
+    font-size: 12px
+    right: 32px
+    top: 40px
+    color: red
+    text-align: right
+
+
+.input_number-min
+    text-align: right
+
+.input_switch-button
+    all: unset
+    border-radius: 8px
+    line-height: 32px
+    text-align: center
+    vertical-align: middle
+
+.input_range-confirm
+    margin-top: 32px
+    border-radius: 8px
+    display: block
+    padding: 10px 32px
+    font-size: 20px
+
+.max_number-hint
+    width: 400px
+    height: 200px
+    font-size: 32px
+    color: red
+
+.input_number-confirm
+    margin-top: 32px
+    border-radius: 8px
+    display: block
+    padding: 15px
+    font-size: 20px
+    width: 80%
+    text-align: center
+
+.input_number-container
+    margin-top: 16px
+    position: relative
+
+.input_number-error
+    color: red
+    position: absolute
+    left: 8px
+    top: 44px
+    font-size: 12px
+
+.input_number
+    width: 100%
+    padding: 8px 16px
+    border-radius: 8px
+
+    &.error
+        color: red
+        border-bottom: 2px solid red
+
+.input_count-txt
+    margin-top: 16px
+    color: #535050
+
+
+.input_count
+    display: inline-block
+    padding: 2px 4px
+    border-radius: 8px
+    border: 2px solid black
+
+.hint
+    position: absolute
+    left: 8px
+    top: -16px
+    font-size: 12px
+
+marquee
+    animation: blinking .5s infinite
+    width: 500px
+
+@keyframes blinking
+    0%
+        color: red
+        background: blue
+    25%
+        color: green
+        background: yellow
+    50%
+        color: yellow
+        background: green
+    75%
+        color: blue
+        background: red
+    100%
+        color: red
+        background: blue
