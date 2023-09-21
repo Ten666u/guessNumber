@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "the guess number game",
   "repository": {
-    "url": "https://github.com/Ten666u/GuessNumber.git"
+    "url": "https://github.com/Ten666u/guessNumber.git"
   },
   "main": "index.js",
   "scripts": {
