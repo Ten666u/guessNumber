@@ -1,13 +1,5 @@
 import {
-    writeRandomNumber,
-    getRangeMin,
-    getRangeMax,
-    getCounter,
-    resetStateStore,
-    getOutOfRange,
-    checkMoreOrLess,
-    checkWinGame,
-    getRandomNumber
+    stateStore
 } from "./stateStore.js";
 
 const MAX_NUMBER = 10000;
@@ -22,7 +14,7 @@ const readyButton = () => {
         chooseRangeStage();
         return;
     }
-    writeRandomNumber(1, 100);
+    stateStore.writeRandomNumber(1, 100);
     guessNumberStage();
 };
 
@@ -146,7 +138,7 @@ const checkRange = (e) => {
         return;
     }
 
-    writeRandomNumber(min, max);
+    stateStore.writeRandomNumber(min, max);
     guessNumberStage();
 };
 
@@ -155,13 +147,13 @@ const guessNumberStage = () => {
     playerContainer.innerHTML = "";
 
     let guessNumberElements = `
-        <h4>Число загадано в диапазоне: [${getRangeMin()}, ${getRangeMax()}]</h4>
+        <h4>Число загадано в диапазоне: [${stateStore.getRangeMin()}, ${stateStore.getRangeMax()}]</h4>
         <div class = "input_number-container">
             <span class="hint"></span>
             <input type="text" step= "1" class="input_number" id="inputNumber" placeholder="Введите число">
             <span class="input_number-error"></span>
         </div>
-        <div class="input_count-txt">Количество попыток: <span class="input_count" id="inputCount">${getCounter()}</span></div>
+        <div class="input_count-txt">Количество попыток: <span class="input_count" id="inputCount">${stateStore.getCounter()}</span></div>
         <button class="input_number-confirm" id="inputNumberConfirm">Отгадать число</button>
         <button class="reset_game-button" id="restartGameButton">Начать заново</button>
     `;
@@ -211,19 +203,19 @@ const checkInputNumber = () =>{
         return
     }
 
-    let counter = getCounter()
+    let counter = stateStore.getCounter()
 
-    if(getOutOfRange(value)){
+    if(stateStore.getOutOfRange(value)){
         inputNumber.classList.add("error")
         inputNumberError.textContent = "Выход за предел диапазона"
     }
 
-    if(checkWinGame(value)){
+    if(stateStore.checkWinGame(value)){
         victoryStage()
         return
     }
 
-    hint.textContent = checkMoreOrLess(value)
+    hint.textContent = stateStore.checkMoreOrLess(value)
     inputCount.innerHTML = counter
     inputNumber.value = ""
 }
@@ -253,10 +245,10 @@ const victoryStage = () =>{
             
         </marquee>
         <marquee direction="right" behavior="alternate">
-            <h1>Число: ${getRandomNumber()}<h1>
+            <h1>Число: ${stateStore.getRandomNumber()}<h1>
         </marquee>
         <marquee behavior="alternate">
-            <h1>Попыток: ${getCounter() - 1}<h1>
+            <h1>Попыток: ${stateStore.getCounter() - 1}<h1>
         </marquee>
         <button class="reset_game-button" id="restartGameButton">Начать заново</button>
     `
@@ -269,7 +261,7 @@ const victoryStage = () =>{
 
 //Функция перезапуска игры
 const restartGame = () => {
-    resetStateStore();
+    stateStore.resetStateStore();
 
     playerContainer.innerHTML = `
     <div class="select_range-container">

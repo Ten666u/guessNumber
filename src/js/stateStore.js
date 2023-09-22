@@ -2,78 +2,84 @@ let stateStore = {
     randomNumber: 0,
     rangeMin: 0,
     rangeMax: 0,
-    counter: -1
-}
+    counter: -1,
 
-export function resetStateStore(){
-    stateStore = {
-        randomNumber: 0,
-        rangeMin: 0,
-        rangeMax: 0,
-        counter: -1
-    }
-}
+    getRangeMin: function(){
+        return this.rangeMin
+    },
 
-export function writeRandomNumber(min, max){
-    stateStore.rangeMin = Number(min)
-    stateStore.rangeMax = Number(max)
-    stateStore.randomNumber = Math.floor(Math.random() * (stateStore.rangeMax - stateStore.rangeMin + 1) + stateStore.rangeMin)
+    getRangeMax: function(){
+        return this.rangeMax
+    },
 
-    console.log(stateStore.randomNumber);
-    return stateStore.randomNumber
-}
+    getCounter: function() {
+        this.counter++;
+    
+        return this.counter;
+    },
 
-export function getRangeMin(){
-    return stateStore.rangeMin
-}
+    resetStateStore: function () {
+        this.randomNumber = 0;
+        this.rangeMin = 0;
+        this.rangeMax = 0;
+        this.counter = -1;
+    },
 
-export function getRangeMax(){
-    return stateStore.rangeMax
-}
+    writeRandomNumber: function (min, max) {
+        this.rangeMin = Number(min);
+        this.rangeMax = Number(max);
+        this.randomNumber = Math.floor(
+            Math.random() * (this.rangeMax - this.rangeMin + 1) + this.rangeMin
+        );
 
-export function getCounter(){
-    stateStore.counter++
+        console.log(this.randomNumber);
 
-    return stateStore.counter
-}
+        return this.randomNumber;
+    },
 
-export function getOutOfRange(inputNumber){
-    if(stateStore.rangeMin > inputNumber || inputNumber > stateStore.rangeMax){
-        return true
-    }
-
-    return false
-}
-
-export function checkWinGame(inputNumber){
-    if(stateStore.randomNumber == inputNumber){
-        return true
-    }
-    return false
-}
-
-export function checkMoreOrLess(inputNumber){
-    if(inputNumber < stateStore.randomNumber){
-        if(stateStore.counter % 3 == 0){
-            return `Загаданное число больше и ${checkEvenOdd()}`
+    getOutOfRange: function (inputNumber) {
+        if (
+            this.rangeMin > inputNumber ||
+            inputNumber > this.rangeMax
+        ) {
+            return true;
         }
-        return "Загаданное число больше"
+    
+        return false;
+    },
+
+    checkWinGame: function (inputNumber) {
+        if (this.randomNumber == inputNumber) {
+            return true;
+        }
+        return false;
+    },
+
+    checkMoreOrLess: function (inputNumber) {
+        if (inputNumber < this.randomNumber) {
+            if (this.counter % 3 == 0) {
+                return `Загаданное число больше и ${checkEvenOdd()}`;
+            }
+            return "Загаданное число больше";
+        }
+    
+        if (this.counter % 3 == 0) {
+            return `Загаданное число меньше и ${checkEvenOdd()}`;
+        }
+    
+        return "Загаданное число меньше";
+    },
+
+    getRandomNumber: function () {
+        return this.randomNumber;
     }
+};
 
-    if(stateStore.counter % 3 == 0){
-        return `Загаданное число меньше и ${checkEvenOdd()}`
+const checkEvenOdd = () => {
+    if (stateStore.randomNumber % 2 == 0) {
+        return "четное";
     }
+    return "нечетное";
+};
 
-    return "Загаданное число меньше"
-}
-
-export function getRandomNumber(){
-    return stateStore.randomNumber
-}
-
-const checkEvenOdd = () =>{
-    if(stateStore.randomNumber % 2 == 0){
-        return "четное"
-    }
-    return "нечетное"
-}
+export { stateStore };
